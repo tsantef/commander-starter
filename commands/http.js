@@ -1,26 +1,26 @@
 var http = require('http');
 
-module.exports = function (program) {
+module.exports = function httpCommand(program) {
 	'use strict';
 
 	function validatePort(rawPort) {
 		return parseInt(rawPort, 10) > 1000;
 	}
 
-	function createServer(port) {
-		port = parseInt(port, 10);
+	function createServer(portRaw) {
+		var port = parseInt(portRaw, 10);
 
 		if (validatePort(port)) {
-			console.log('Opening http server on port:', port);
+			program.successMessage('Opening http server on port: %s', port);
 			http.createServer(function (req, res) {
-				console.log(req.url);
+				program.log(req.url);
 				res.writeHead(200, {
 					'Content-Type': 'text/plain'
 				});
 				res.end('Hello World!');
 			}).listen(port);
 		} else {
-			console.error('Invalid or missing port number');
+			program.errorMessage('Port number (%s) is invalid', portRaw);
 			process.exit(1);
 		}
 	}
@@ -41,7 +41,7 @@ module.exports = function (program) {
 					}
 				}, function (err, result) {
 					if (err) {
-						throw new Error(err);
+						return program.handleError(err);
 					} else {
 						createServer(result.port);
 					}
