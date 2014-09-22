@@ -1,5 +1,5 @@
 var program = require('commander');
-// var commands = require('./commands')(program);
+var commands = require('./commands')(program);
 var packageJson = require('./package.json');
 
 // Initialize cli options
