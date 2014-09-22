@@ -23,6 +23,7 @@
   },
   "homepage": "https://github.com/tsantef/commander-starter",
   "dependencies": {
-    "commander": "^2.3.0"
+    "commander": "^2.3.0",
+    "prompt": "^0.2.14"
   }
 }

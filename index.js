@@ -7,6 +7,12 @@ program
 	.version(packageJson.version)
 	.usage('<command> [options]');
 
+// Initialize prompt
+program.prompt = require('prompt');
+program.prompt.message = '';
+program.prompt.delimiter = '';
+program.prompt.colors = false;
+
 // Process Commands
 program.parse(process.argv);
 
