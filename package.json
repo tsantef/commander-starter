@@ -3,6 +3,9 @@
   "version": "0.0.1",
   "description": "Starter app for creating command line tools in node",
   "main": "index.js",
+  "bin": {
+    "cli": "./bin/cli"
+  },
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
