@@ -1,4 +1,4 @@
-module.exports = function commandLoader(program) {
+module.exports = function helloCommand(program) {
 	'use strict';
 
 	program
