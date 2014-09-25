@@ -1,5 +1,6 @@
 var fs = require('fs');
 var util = require('util');
+var request = require('request');
 var program = require('commander');
 var commands = require('./commands')(program);
 var packageJson = require('./package.json');
@@ -57,10 +58,33 @@ program.handleError = function handleError(err, exitCode) {
 	process.exit(exitCode || 1);
 };
 
-// Process Commands
-program.parse(process.argv);
+program.request = function (opts, next) {
+  if (program.debug) {
+    program.log('REQUEST: '.bold + JSON.stringify(opts, null, 2));
+  } else {
+  	program.log(opts.uri);
+  }
+  return request(opts, function (err, res, body) {
+    if (err) {
+      if (program.debug) {
+        program.errorMessage(err.message);
+      }
+      return next(err, res, body);
+    }
+    else {
+      if (program.debug) {
+        program.log('RESPONSE: '.bold + JSON.stringify(res.headers, null, 2));
+        program.log('BODY: '.bold + JSON.stringify(res.body, null, 2));
+      }
+      return next(err, res, body);
+    }
+  });
+};
+
 
 if (typeof program.args.slice(-1)[0] !== 'object') {
 	console.log('Unknown Command: ' + program.args.join(' '));
 	program.help();
 }
+// Process Commands
+program.parse(process.argv);

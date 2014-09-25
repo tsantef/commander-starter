@@ -24,6 +24,7 @@
   "homepage": "https://github.com/tsantef/commander-starter",
   "dependencies": {
     "commander": "^2.3.0",
-    "prompt": "^0.2.14"
+    "prompt": "^0.2.14",
+    "request": "^2.44.0"
   }
 }
