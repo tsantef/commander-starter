@@ -11,7 +11,7 @@ module.exports = function helloCommand(program) {
 			opts.uri = 'http://finance.yahoo.com/d/quotes.csv?s=' + symbol.toUpperCase() + '&f=nabs';
 			opts.encodeing = 'utf8';
 
-			console.log('Fetching [' + symbol + ']');
+			process.stdout.write('Fetching [' + symbol + '] ');
 
 			program.request(opts, function (err, req, body) {
 				if (err) {
