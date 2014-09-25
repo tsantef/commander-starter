@@ -1,3 +1,5 @@
+var Table = require('cli-table');
+
 module.exports = function helloCommand(program) {
 	'use strict';
 
@@ -8,28 +10,44 @@ module.exports = function helloCommand(program) {
 
 			var opts = {};
 
-			opts.uri = 'http://finance.yahoo.com/d/quotes.csv?s=' + symbol.toUpperCase() + '&f=nabs';
+			var dataKeys = {
+				s: 'Symbol',
+				n: 'Name',
+				a: 'Ask',
+				b: 'Bid',
+				w: '52 week Range',
+				v: 'Volume',
+				e: 'Earnings / Share',
+				j1: 'Market Capitalization'
+			};
+
+			opts.uri = 'http://finance.yahoo.com/d/quotes.csv?s=' + symbol.toUpperCase() + '&f=' + Object.keys(dataKeys).join('');
 			opts.encodeing = 'utf8';
 
 			process.stdout.write('Fetching [' + symbol + '] ');
 
 			program.request(opts, function (err, req, body) {
+				var rows;
 				if (err) {
 					return program.handleError(err);
 				}
 				body = body.replace(/\r\n$/, '');
-				var rows = body.split('\r\n');
-				rows.forEach(function (row) {
-					var parts = row.split(',');
-					var name = parts[0].replace(/\"/g, '');
-					var symbol = parts[3];
-					var bid = parts[1];
-					if (symbol !== 'N/A') {
-						program.successMessage('%s - $%s', name, bid);
-					} else {
-						program.errorMessage('Unknown symbol: %s', name);
-					}
+				rows = body.split('\r\n');
+
+				var table = new Table({
+					head: Object.keys(dataKeys).map(function (key) {
+						return dataKeys[key];
+					})
 				});
+
+				rows.forEach(function (row) {
+					var parts = row.split(',').map(function (cell) {
+						return cell.replace(/\"/g, '');
+					});
+					table.push(parts);
+				});
+
+				console.log(table.toString());
 			});
 
 		});

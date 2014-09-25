@@ -2,6 +2,17 @@
   "name": "commander-starter",
   "version": "0.0.1",
   "dependencies": {
+    "cli-table": {
+      "version": "0.3.0",
+      "from": "cli-table@",
+      "dependencies": {
+        "colors": {
+          "version": "0.6.2",
+          "from": "colors@0.6.2",
+          "resolved": "https://registry.npmjs.org/colors/-/colors-0.6.2.tgz"
+        }
+      }
+    },
     "commander": {
       "version": "2.3.0",
       "from": "commander@"

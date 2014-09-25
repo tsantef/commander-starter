@@ -25,6 +25,7 @@
   "dependencies": {
     "commander": "^2.3.0",
     "prompt": "^0.2.14",
-    "request": "^2.44.0"
+    "request": "^2.44.0",
+    "cli-table": "^0.3.0"
   }
 }
