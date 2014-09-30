@@ -20,6 +20,10 @@ program.prompt.message = '';
 program.prompt.delimiter = '';
 program.prompt.colors = false;
 
+// Turn off colors if not TTY
+var colors = require('colors');
+colors.mode = process.stdout.isTTY ? colors.mode : 'none';
+
 // Setup logging and messaging
 var logMessages = [];
 program.log = (function (debugMode) {

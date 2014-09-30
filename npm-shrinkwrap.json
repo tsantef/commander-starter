@@ -13,6 +13,10 @@
         }
       }
     },
+    "colors": {
+      "version": "0.6.2",
+      "from": "colors@"
+    },
     "commander": {
       "version": "2.3.0",
       "from": "commander@"
