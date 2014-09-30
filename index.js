@@ -20,7 +20,7 @@ program.prompt.message = '';
 program.prompt.delimiter = '';
 program.prompt.colors = false;
 
-// Turn off colors if not TTY
+// Turn off colors when non-interactive
 var colors = require('colors');
 colors.mode = process.stdout.isTTY ? colors.mode : 'none';
 
@@ -63,6 +63,7 @@ program.handleError = function handleError(err, exitCode) {
 	process.exit(exitCode || 1);
 };
 
+// Create request wrapper
 program.request = function (opts, next) {
   if (program.debug) {
     program.log('REQUEST: '.bold + JSON.stringify(opts, null, 2));
@@ -93,5 +94,6 @@ program.on('*', function() {
 	console.log('Unknown Command: ' + program.args.join(' '));
 	program.help();
 });
+
 // Process Commands
 program.parse(process.argv);
