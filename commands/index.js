@@ -14,10 +14,10 @@ module.exports = function commandLoader(program) {
 		var name = filename.substr(0, filename.lastIndexOf('.'));
 
 		// Require command
-		commands[name] = require(path.join(loadPath, filename));
+		var command = require(path.join(loadPath, filename));
 
 		// Initialize command
-		commands[name](program);
+		commands[name] = command(program);
 	});
 
 	return commands;
