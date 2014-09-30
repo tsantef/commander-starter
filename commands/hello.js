@@ -7,6 +7,7 @@ module.exports = function helloCommand(program) {
 		.action(function(name, command) {
 
 			console.log('Hello ' + name);
+			program.log(name);
 
 		});
 

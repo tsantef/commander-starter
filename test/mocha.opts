@@ -1,0 +1,4 @@
+--require test/setup
+--reporter spec
+--ui tdd
+--recursive test/**/*.mspec.js

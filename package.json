@@ -7,7 +7,7 @@
     "cli": "./bin/cli"
   },
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "mocha"
   },
   "repository": {
     "type": "git",
@@ -26,8 +26,12 @@
     "commander": "^2.3.0",
     "prompt": "^0.2.14",
     "request": "^2.44.0",
-    "cli-table": "^0.3.0"
     "cli-table": "^0.3.0",
     "colors": "^0.6.2"
+  },
+  "devDependencies": {
+    "mocha": "^1.21.4",
+    "sinon": "^1.10.3",
+    "chai": "^1.9.2"
   }
 }
