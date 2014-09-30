@@ -85,9 +85,9 @@ program.request = function (opts, next) {
 };
 
 
-if (typeof program.args.slice(-1)[0] !== 'object') {
+program.on('*', function() {
 	console.log('Unknown Command: ' + program.args.join(' '));
 	program.help();
-}
+});
 // Process Commands
 program.parse(process.argv);
